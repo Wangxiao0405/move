@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>move</title>
+</head>
+<style>
+    .box{
+        width: 300px;
+        height: 300px;
+        border: 2px solid red;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+</style>
+<body>
+    <div class="box"></div>
+</body>
+</html>
+<script>
+    let box=document.querySelector(".box");
+    //
+    box.onmousedown=function (event) {
+        event=event||window.event;
+        let x0=event.clientX;
+        let y0=event.clientY;
+        let x2=this.offsetLeft;
+        let y2=this.offsetTop;
+        box.onmousemove=function (event2) {
+            event=event2||window.event;
+            let x1=event.clientX;
+            let y1=event.clientY;
+            x=x1-x0+x2;
+            y=y1-y0+y2;
+            this.style=`left:${x}px;top:${y}px`;
+        }
+        box.onmouseup=function () {
+            box.onmousemove="";
+            box.onmouseup="";
+        }
+    }
+</script>
